@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B1786D428FBF52500B0C28B /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 0B1786D328FBF52500B0C28B /* Kingfisher */; };
 		0BDB023D28FB8D9A005CBC53 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BDB023C28FB8D9A005CBC53 /* AppDelegate.swift */; };
 		0BDB024628FB8D9B005CBC53 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0BDB024528FB8D9B005CBC53 /* Assets.xcassets */; };
 		0BDB024928FB8D9B005CBC53 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0BDB024728FB8D9B005CBC53 /* LaunchScreen.storyboard */; };
@@ -16,6 +17,8 @@
 		0BDB026328FB9EDB005CBC53 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 0BDB026228FB9EDB005CBC53 /* Moya */; };
 		0BDB026628FBA5D4005CBC53 /* RecentListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BDB026528FBA5D4005CBC53 /* RecentListViewModel.swift */; };
 		0BDB026928FBA90D005CBC53 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BDB026828FBA90D005CBC53 /* Photo.swift */; };
+		0BDB027128FBDF46005CBC53 /* PhotoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BDB026F28FBDF46005CBC53 /* PhotoTableViewCell.swift */; };
+		0BDB027228FBDF46005CBC53 /* PhotoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0BDB027028FBDF46005CBC53 /* PhotoTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +32,8 @@
 		0BDB025F28FB9E05005CBC53 /* FlickrAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrAPI.swift; sourceTree = "<group>"; };
 		0BDB026528FBA5D4005CBC53 /* RecentListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentListViewModel.swift; sourceTree = "<group>"; };
 		0BDB026828FBA90D005CBC53 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		0BDB026F28FBDF46005CBC53 /* PhotoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoTableViewCell.swift; sourceTree = "<group>"; };
+		0BDB027028FBDF46005CBC53 /* PhotoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +41,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B1786D428FBF52500B0C28B /* Kingfisher in Frameworks */,
 				0BDB026328FB9EDB005CBC53 /* Moya in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -118,6 +124,7 @@
 		0BDB025928FB9214005CBC53 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				0BDB026E28FBDF15005CBC53 /* PhotoTableViewCell */,
 				0BDB025528FB91CE005CBC53 /* RecentListViewController.xib */,
 			);
 			path = View;
@@ -179,6 +186,15 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		0BDB026E28FBDF15005CBC53 /* PhotoTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				0BDB026F28FBDF46005CBC53 /* PhotoTableViewCell.swift */,
+				0BDB027028FBDF46005CBC53 /* PhotoTableViewCell.xib */,
+			);
+			path = PhotoTableViewCell;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -197,6 +213,7 @@
 			name = "flickr app";
 			packageProductDependencies = (
 				0BDB026228FB9EDB005CBC53 /* Moya */,
+				0B1786D328FBF52500B0C28B /* Kingfisher */,
 			);
 			productName = "flickr app";
 			productReference = 0BDB023928FB8D9A005CBC53 /* flickr app.app */;
@@ -228,6 +245,7 @@
 			mainGroup = 0BDB023028FB8D9A005CBC53;
 			packageReferences = (
 				0BDB026128FB9EDB005CBC53 /* XCRemoteSwiftPackageReference "Moya" */,
+				0B1786D228FBF52500B0C28B /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = 0BDB023A28FB8D9A005CBC53 /* Products */;
 			projectDirPath = "";
@@ -243,6 +261,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0BDB027228FBDF46005CBC53 /* PhotoTableViewCell.xib in Resources */,
 				0BDB024928FB8D9B005CBC53 /* LaunchScreen.storyboard in Resources */,
 				0BDB025728FB91CE005CBC53 /* RecentListViewController.xib in Resources */,
 				0BDB024628FB8D9B005CBC53 /* Assets.xcassets in Resources */,
@@ -258,6 +277,7 @@
 			files = (
 				0BDB026028FB9E05005CBC53 /* FlickrAPI.swift in Sources */,
 				0BDB026628FBA5D4005CBC53 /* RecentListViewModel.swift in Sources */,
+				0BDB027128FBDF46005CBC53 /* PhotoTableViewCell.swift in Sources */,
 				0BDB023D28FB8D9A005CBC53 /* AppDelegate.swift in Sources */,
 				0BDB025628FB91CE005CBC53 /* RecentListViewController.swift in Sources */,
 				0BDB026928FBA90D005CBC53 /* Photo.swift in Sources */,
@@ -482,6 +502,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		0B1786D228FBF52500B0C28B /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
 		0BDB026128FB9EDB005CBC53 /* XCRemoteSwiftPackageReference "Moya" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Moya/Moya.git";
@@ -493,6 +521,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		0B1786D328FBF52500B0C28B /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0B1786D228FBF52500B0C28B /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
 		0BDB026228FB9EDB005CBC53 /* Moya */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 0BDB026128FB9EDB005CBC53 /* XCRemoteSwiftPackageReference "Moya" */;

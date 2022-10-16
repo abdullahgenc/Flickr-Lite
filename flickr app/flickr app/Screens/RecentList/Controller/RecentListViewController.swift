@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 final class RecentListViewController: UIViewController {
     
@@ -25,7 +26,8 @@ final class RecentListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        let nib = UINib(nibName: "PhotoTableViewCell", bundle: nil)
+        tableView.register(nib, forCellReuseIdentifier: "cell")
         
         viewModel.fetchRecentList()
         
@@ -56,18 +58,22 @@ extension RecentListViewController: UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = viewModel.photoForIndexPath(indexPath)?.ownername
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! PhotoTableViewCell
+        
+        guard let photo = viewModel.photoForIndexPath(indexPath) else {
+            fatalError("photo not found")
+        }
+        cell.userName = photo.ownername
+        cell.title = (photo.title == "") ? "-- No Description --" : photo.title
+        cell.profileImageView.kf.setImage(with: photo.profileImageUrl)
+        cell.photoImageView.kf.setImage(with: photo.photoImageUrl) { _ in
+            tableView.reloadRows(at: [indexPath], with: .automatic)
+        }
         return cell
     }
     
     
 }
-
-// key : 0abf7d115f6645b13e0e48902dab7f8b
-// secret : a1d613624e986eaf
-// format : https://live.staticflickr.com/{server-id}/{id}_{secret}_{size-suffix}.jpg
-
 
 
 

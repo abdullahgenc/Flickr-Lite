@@ -13,7 +13,7 @@ enum FlickrAPI {
     case search(text: String)
 }
 
-private let apiKey = "3251950b2f84f909042bcf2c93c9d216"
+private let apiKey = "ca3c24381b5fa8ec9337f168639fe712"
 
 extension FlickrAPI: TargetType {
     var baseURL: URL {
@@ -36,7 +36,7 @@ extension FlickrAPI: TargetType {
         case .getRecent:
             let parameters: [String: Any] = ["method" : "flickr.photos.getRecent",
                                              "api_key" : apiKey,
-                                             "extras" : "owner_name",
+                                             "extras" : "owner_name, icon_server",
                                              "format" : "json",
                                              "nojsoncallback" : 1]
             return .requestParameters(parameters: parameters, encoding: URLEncoding.queryString)
@@ -44,7 +44,7 @@ extension FlickrAPI: TargetType {
             let parameters: [String: Any] = ["method" : "flickr.photos.search",
                                              "api_key" : apiKey,
                                              "text" : text,
-                                             "extras" : "owner_name",
+                                             "extras" : "owner_name, icon_server",
                                              "format" : "json",
                                              "nojsoncallback" : 1]
             return .requestParameters(parameters: parameters, encoding: URLEncoding.queryString)

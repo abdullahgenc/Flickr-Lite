@@ -24,5 +24,34 @@ struct Photo: Codable {
     let farm: Int?
     let title: String?
     let ispublic, isfriend, isfamily: Int?
-    let ownername: String?
+    let ownername, iconserver: String?
+    let iconfarm: Int?
 }
+
+extension Photo {
+    var profileImageUrl: URL {
+        guard let icon_farm = iconfarm?.description,
+              let icon_server = iconserver,
+              let nsid = owner else {
+            fatalError("profile url not found")
+        }
+        if icon_farm == "0" || icon_server == "0" {
+            let profileImageUrl = URL(string: "https://www.flickr.com/images/buddyicon.gif")
+            return profileImageUrl!
+        } else {
+            let profileImageUrl = URL(string: "https://farm\(icon_farm).staticflickr.com/\(icon_server)/buddyicons/\(nsid).jpg")
+            return profileImageUrl!
+        }
+    }
+    
+    var photoImageUrl: URL {
+        guard let server_id = server,
+              let secret = secret,
+              let id = id,
+              let photoImageUrl = URL(string: "https://live.staticflickr.com/\(server_id)/\(id)_\(secret).jpg") else {
+            fatalError("photo url not found")
+        }
+        return photoImageUrl
+    }
+}
+
