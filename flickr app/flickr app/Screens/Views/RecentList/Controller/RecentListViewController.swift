@@ -10,11 +10,11 @@ import Kingfisher
 
 final class RecentListViewController: UIViewController {
     
-    private var viewModel: RecentListViewModel
+    private var viewModel: PhotoViewModel
     
     @IBOutlet private weak var tableView: UITableView!
 
-    init(viewModel: RecentListViewModel) {
+    init(viewModel: PhotoViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -25,6 +25,8 @@ final class RecentListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        title = "Recent Posts"
         
         let nib = UINib(nibName: "PhotoTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "cell")
@@ -39,8 +41,6 @@ final class RecentListViewController: UIViewController {
                 print(error.localizedDescription)
             }
         }
-
-        // Do any additional setup after loading the view.
     }
 }
 
@@ -53,11 +53,12 @@ extension RecentListViewController: UITableViewDelegate {
 extension RecentListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel.numberOfRows
+        return viewModel.numberOfRows
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! PhotoTableViewCell
         
         guard let photo = viewModel.photoForIndexPath(indexPath) else {

@@ -13,11 +13,11 @@ enum FlickrAPI {
     case search(text: String)
 }
 
-private let apiKey = "ca3c24381b5fa8ec9337f168639fe712"
+private let apiKey = "bd55e9803148dad0a9e2bf086fee6cfa"
 
 extension FlickrAPI: TargetType {
     var baseURL: URL {
-        guard let url = URL(string: "https://www.flickr.com/services/rest") else {
+        guard let url = URL(string: "https://api.flickr.com/services/rest") else {
             fatalError("Base url not found.")
         }
         return url

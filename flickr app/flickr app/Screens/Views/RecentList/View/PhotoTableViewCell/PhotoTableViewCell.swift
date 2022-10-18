@@ -31,12 +31,16 @@ class PhotoTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
         profileImageView.layer.masksToBounds = true
         profileImageView.layer.borderWidth = 1.0
         profileImageView.layer.borderColor = UIColor.black.cgColor
         profileImageView.layer.cornerRadius = 20.0
+        
+        photoImageView.layer.masksToBounds = true
+        photoImageView.layer.borderWidth = 0.2
+        profileImageView.layer.borderColor = UIColor.black.cgColor
         photoImageView.layer.cornerRadius = 20.0
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
