@@ -6,9 +6,10 @@
 //
 
 import UIKit
-import FirebaseAuth
 
-final class AuthViewController: UIViewController {
+final class AuthViewController: FViewController {
+    
+    private let viewModel: AuthViewModel
     
     enum AuthType: String {
         case signIn = "Sign In"
@@ -39,10 +40,32 @@ final class AuthViewController: UIViewController {
     @IBOutlet weak var confirmButton: UIButton!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     
+    init(viewModel: AuthViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        viewModel.changeHandler = { change in
+            switch change {
+            case .didErrorOccurred(let error):
+                self.showError(error)
+            case .didSignUpSuccessful:
+                self.showAlert(title: "SIGN UP SUCCESSFUL!")
+            }
+        }
+        
         title = "Auth"
+        
+        viewModel.fetchRemoteConfig { isSignUpDisabled in
+            self.segmentedControl.isHidden = isSignUpDisabled
+        }
     }
     
     @IBAction func didTapLoginButton(_ sender: UIButton) {
@@ -54,21 +77,37 @@ final class AuthViewController: UIViewController {
         
         switch authType {
         case .signIn:
-            Auth.auth().signIn(withEmail: credential, password: password) { [weak self] authResult, error in
-                guard let strongSelf = self else { return }
-                if let error = error {
-                    print(error.localizedDescription)
+            
+            viewModel.signIn(email: credential, password: password) { [weak self] in
+                guard let self = self else { return }
+                
+                let images = ["home", "search", "person"]
+                let titles = ["Recent Posts", "Search", "Profile"]
+
+                let recentViewController = RecentListViewController(viewModel: RecentListViewModel())
+                let recentNavigationController = UINavigationController(rootViewController: recentViewController)
+                
+                let searchViewController = SearchPhotoViewController(viewModel: SearchPhotoViewModel())
+                let searchNavigationController = UINavigationController(rootViewController: searchViewController)
+                
+                let profileViewController = ProfileViewController(viewModel: ProfileViewModel())
+                let profileNavigationController = UINavigationController(rootViewController: profileViewController)
+
+                let tabBarController = UITabBarController()
+                tabBarController.viewControllers = [recentNavigationController, searchNavigationController, profileNavigationController]
+
+                guard let items = tabBarController.tabBar.items else {
                     return
                 }
-                print("success")
+                for x in 0..<items.count {
+                    items[x].image = UIImage(named: images[x])
+                    items[x].title = titles[x]
+                }
+
+                self.navigationController?.pushViewController(tabBarController, animated: true)
             }
         case .signUp:
-            Auth.auth().createUser(withEmail: credential, password: password) { authResult, error in
-                if let error = error {
-                    print(error.localizedDescription)
-                    return
-                }
-            }
+            viewModel.signUp(email: credential, password: password)
         }
     }
     

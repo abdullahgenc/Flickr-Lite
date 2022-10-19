@@ -8,12 +8,14 @@
 import Moya
 import Foundation
 
+let provider = MoyaProvider<FlickrAPI>()
+
 enum FlickrAPI {
     case getRecent
     case search(text: String)
 }
 
-private let apiKey = "bd55e9803148dad0a9e2bf086fee6cfa"
+private let apiKey = "a6cfc7b65f0b815396e97c15946a7dd9"
 
 extension FlickrAPI: TargetType {
     var baseURL: URL {
