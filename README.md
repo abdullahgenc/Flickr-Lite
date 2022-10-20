@@ -1,5 +1,19 @@
 # Pazarama iOS Bootcamp - Hafta 4 - Ödev
 
+Note: Before the application is run, it is necessary to assign the current api to the apiKey variable in the FlickrAPI.swift file.
+
+## Requirements I Couldnt Make on Time
+
+- User profile editing operation.
+- Display of liked and saved posts on the profile page. (post informations are successfully stored in firestore)
+- Using IQKeyboardManager
+
+Remaining requirements and developments will be done at develop branch.
+
+## App Overview
+
+https://user-images.githubusercontent.com/47529941/196901036-288011fe-210e-41cd-b117-bc0d3fcf87f7.mp4
+
 ## Flickr App
 
 Uygulamamızı geliştirirken Flickr API ve Firebase araçlarını kullanacağız. Uygulamada Firebase Auth ile kullanıcı kayıt ve giriş işlemlerini yöneteceğiz. Uygulamanın ana ekranında Flickr API’ı kullanarak son yüklenen fotoğrafları UITableViewController kullanarak listeleyeceğiz. Bu aşamada özelleşmiş bir UITableViewCell ile Instagram’daki post benzeri bir görünüm oluşturacağız. Kullanıcı görseli beğenebilir, kütüphanesine kaydedebilir ve profil ekranından önceden beğendiği veya kütüphaneye kaydettiği fotoğrafları görüntüleyebilir. Firebase firestore kullanılarak bilgiler buluta kaydedilmelidir.
