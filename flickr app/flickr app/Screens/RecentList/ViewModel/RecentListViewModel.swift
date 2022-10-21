@@ -11,8 +11,6 @@ import FirebaseFirestore
 enum RecentListChanges {
     case didErrorOccurred(_ error: Error)
     case didFetchList
-    case didPhotoAddedToFavorites(_ indexPath: IndexPath)
-    case didPhotoAddedToBookmarks(_ indexPath: IndexPath)
 }
 
 final class RecentListViewModel {
@@ -83,12 +81,19 @@ final class RecentListViewModel {
               let uid = defaults.string(forKey: UserDefaultConstants.uid.rawValue) else {
             return
         }
-        
         db.collection("users").document(uid).updateData([
             "favorites": FieldValue.arrayUnion([id])
         ])
-        
-        self.changeHandler?(.didPhotoAddedToFavorites(indexPath))
+    }
+    
+    func removeFavorite(_ indexPath: IndexPath) {
+        guard let id = photoForIndexPath(indexPath)?.id,
+              let uid = defaults.string(forKey: UserDefaultConstants.uid.rawValue) else {
+            return
+        }
+        db.collection("users").document(uid).updateData([
+            "favorites": FieldValue.arrayRemove([id])
+        ])
     }
     
     func addBookmark(_ indexPath: IndexPath) {
@@ -100,7 +105,15 @@ final class RecentListViewModel {
         db.collection("users").document(uid).updateData([
             "bookmarks": FieldValue.arrayUnion([id])
         ])
-        
-        self.changeHandler?(.didPhotoAddedToBookmarks(indexPath))
+    }
+    
+    func removeBookmark(_ indexPath: IndexPath) {
+        guard let id = photoForIndexPath(indexPath)?.id,
+              let uid = defaults.string(forKey: UserDefaultConstants.uid.rawValue) else {
+            return
+        }
+        db.collection("users").document(uid).updateData([
+            "bookmarks": FieldValue.arrayRemove([id])
+        ])
     }
 }

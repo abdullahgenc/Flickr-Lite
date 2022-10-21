@@ -23,15 +23,14 @@ final class AuthViewModel {
     
     var changeHandler: ((AuthViewModelChange) -> Void)?
     
-    func signUp(email: String,
-                password: String) {
+    func signUp(email: String, password: String) {
         Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
             if let error = error {
                 self.changeHandler?(.didErrorOccurred(error))
                 return
             }
             
-            let user = User(username: authResult?.user.displayName,
+            let user = User(username: authResult?.user.email,
                             email: authResult?.user.email,
                             profileImage: "",
                             favorites: [],
@@ -58,9 +57,7 @@ final class AuthViewModel {
         }
     }
     
-    func signIn(email: String,
-                password: String,
-                completion: @escaping () -> Void) {
+    func signIn(email: String, password: String, completion: @escaping () -> Void) {
         Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
             if let error = error {
                 self.changeHandler?(.didErrorOccurred(error))

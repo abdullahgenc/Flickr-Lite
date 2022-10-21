@@ -14,6 +14,8 @@ final class ProfileViewModel: FViewModel {
         photos.count
     }
     
+    var username = String()
+    
     func photoForIndexPath(_ indexPath: IndexPath) -> Photo? {
         photos[indexPath.row]
     }
@@ -28,8 +30,9 @@ final class ProfileViewModel: FViewModel {
                 return
             }
             let user = User(from: data)
+            self.username = user.username!
             user.favorites?.forEach({ photoId in
-                self.db.collection("favorites").document(photoId).getDocument { (querySnapshot, err) in
+                self.db.collection("photos").document(photoId).getDocument { (querySnapshot, err) in
                     if let err = err {
                         print(err.localizedDescription)
                         completion(err)
@@ -40,7 +43,6 @@ final class ProfileViewModel: FViewModel {
                         }
                         
                         let photo = Photo(from: data)
-                        print("fav title: \(photo.title)")
                         self.photos.append(photo)
                         completion(nil)
                     }
@@ -62,17 +64,17 @@ final class ProfileViewModel: FViewModel {
                 return
             }
             let user = User(from: data)
-            
+            self.username = user.username!
             user.bookmarks?.forEach({ photoId in
-                self.db.collection("bookmarks").document(photoId).getDocument { (querySnapshot, err) in
+                self.db.collection("photos").document(photoId).getDocument { (querySnapshot, err) in
                     if let err = err {
                         completion(err)
                     } else {
+                        
                         guard let data = querySnapshot?.data() else {
                             return
                         }
                         let photo = Photo(from: data)
-                        print("bookmark title: \(photo.title)")
                         self.photos.append(photo)
                         completion(nil)
                     }

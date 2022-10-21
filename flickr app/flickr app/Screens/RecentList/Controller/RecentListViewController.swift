@@ -12,6 +12,10 @@ final class RecentListViewController: FViewController {
     
     private var viewModel: RecentListViewModel
     
+    private var favTags = [Int]()
+    
+    private var bookTags = [Int]()
+    
     @IBOutlet private weak var tableView: UITableView!
 
     init(viewModel: RecentListViewModel) {
@@ -41,13 +45,6 @@ final class RecentListViewController: FViewController {
                 self.tableView.reloadData()
             case .didErrorOccurred(let error):
                 self.showError(error)
-            case .didPhotoAddedToFavorites(let indexPath):
-                let cell = self.tableView.cellForRow(at: indexPath) as! PhotoTableViewCell
-                cell.likeButton.setImage(UIImage(named: "heart.fill"), for: .normal)
-            case .didPhotoAddedToBookmarks(let indexPath):
-                let cell = self.tableView.cellForRow(at: indexPath) as! PhotoTableViewCell
-                cell.bookmarkButton.setImage(UIImage(named: "bookmark.fill"), for: .normal)
-                
             }
         }
     }
@@ -56,8 +53,7 @@ final class RecentListViewController: FViewController {
 extension RecentListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        print(tableView.cellForRow(at: indexPath)?.tag)
-        
+        print("tapped row: \(indexPath.row)")
     }
     
 }
@@ -79,41 +75,52 @@ extension RecentListViewController: UITableViewDataSource {
         cell.userName = photo.ownername
         cell.title = (photo.title == "") ? "-- No Description --" : photo.title
         cell.profileImageView.kf.setImage(with: photo.profileImageUrl)
-        cell.photoImageView.kf.setImage(with: photo.photoImageUrl) { _ in
-            tableView.reloadRows(at: [indexPath], with: .automatic)
-        }
+        cell.photoImageView.kf.setImage(with: photo.photoImageUrl)
         cell.delegate = self
         cell.likeButton.tag = indexPath.row
         cell.bookmarkButton.tag = indexPath.row
-
+        
+        if favTags.contains(indexPath.row) {
+            cell.likeButton.setImage(UIImage(named: "heart.fill"), for: .normal)
+        } else {
+            cell.likeButton.setImage(UIImage(named: "heart"), for: .normal)
+        }
+        
+        if bookTags.contains(indexPath.row) {
+            cell.bookmarkButton.setImage(UIImage(named: "bookmark.fill"), for: .normal)
+        } else {
+            cell.bookmarkButton.setImage(UIImage(named: "bookmark"), for: .normal)
+        }
         return cell
     }
-    
 }
 
 extension RecentListViewController: PhotoTableViewCellDelegate {
+    
     func photoTableViewCell(likeButton button: UIButton) {
-        print("----")
-        if button.image(for: .normal)?.pngData() == (UIImage(named: "heart.fill")?.pngData()) {
-            print("REMOVED FROM FAVORITE")
-
+        let indexPath = IndexPath(row: button.tag, section: .zero)
+        if favTags.contains(button.tag) {
+            let index = favTags.firstIndex(of: button.tag)
+            favTags.remove(at: index!)
             button.setImage(UIImage(named: "heart"), for: .normal)
-
+            viewModel.removeFavorite(indexPath)
         } else {
-            let indexPath = IndexPath(row: button.tag, section: .zero)
+            favTags.append(button.tag)
+            button.setImage(UIImage(named: "heart.fill"), for: .normal)
             viewModel.addFavorite(indexPath)
         }
     }
     
     func photoTableViewCell(bookmarkButton button: UIButton) {
-        print("----")
-        if button.image(for: .normal)?.pngData() == (UIImage(named: "bookmark.fill")?.pngData()) {
-            print("REMOVED FROM FAVORITE")
-
+        let indexPath = IndexPath(row: button.tag, section: .zero)
+        if bookTags.contains(button.tag) {
+            let index = bookTags.firstIndex(of: button.tag)
+            bookTags.remove(at: index!)
             button.setImage(UIImage(named: "bookmark"), for: .normal)
-
+            viewModel.removeBookmark(indexPath)
         } else {
-            let indexPath = IndexPath(row: button.tag, section: .zero)
+            bookTags.append(button.tag)
+            button.setImage(UIImage(named: "bookmark.fill"), for: .normal)
             viewModel.addBookmark(indexPath)
         }
     }

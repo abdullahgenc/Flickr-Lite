@@ -44,14 +44,7 @@ final class ProfileViewController: FViewController {
             if let error = error {
                 self.showError(error)
             } else {
-                self.collectionView.reloadData()
-            }
-        }
-
-        viewModel.fetchBookmarks { error in
-            if let error = error {
-                self.showError(error)
-            } else {
+                self.userNameLabel.text = self.viewModel.username
                 self.collectionView.reloadData()
             }
         }
@@ -109,13 +102,12 @@ extension ProfileViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! PhotoCollectionViewCell
-        
+
         guard let photo = viewModel.photoForIndexPath(indexPath) else { fatalError("photo not found") }
-        print(photo.title)
+
         cell.photoImageView.kf.setImage(with: photo.photoImageUrl)
-        
+
         return cell
     }
 }

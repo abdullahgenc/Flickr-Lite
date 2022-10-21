@@ -20,7 +20,7 @@ extension User {
     init(from dict: [String: Any]) {
         username = dict["username"] as? String
         email = dict["email"] as? String
-        profileImage = dict["pp"] as? String
+        profileImage = dict["profileImage"] as? String
         favorites = dict["favorites"] as? [String]
         bookmarks = dict["bookmarks"] as? [String]
     }
