@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 import FirebaseAuth
 
 final class ProfileViewController: FViewController {
@@ -14,6 +15,7 @@ final class ProfileViewController: FViewController {
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var userNameLabel: UILabel!
+    @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -31,40 +33,56 @@ final class ProfileViewController: FViewController {
 
         title = "Profile"
         
+        imageView.layer.masksToBounds = true
+        imageView.layer.borderWidth = 1.0
+        imageView.layer.borderColor = UIColor.black.cgColor
+        imageView.layer.cornerRadius = 20.0
+        
+        editButton.layer.masksToBounds = true
+        editButton.layer.cornerRadius = 5.0
+        
         let nib = UINib(nibName: "PhotoCollectionViewCell", bundle: nil)
         collectionView.register(nib, forCellWithReuseIdentifier: "cell")
         
         let button = UIButton(type: .custom)
         button.setImage(UIImage(named: "logout"), for: .normal)
         button.addTarget(self, action: #selector(self.clickedSignOut), for: .touchUpInside)
+        
         let rightButtonBar = UIBarButtonItem(customView: button)
         navigationItem.rightBarButtonItem = rightButtonBar
 
-        viewModel.fetchFavorites { error in
+        viewModel.fetchUser() { error in
             if let error = error {
                 self.showError(error)
             } else {
-                self.collectionView.reloadData()
-            }
-        }
-
-        viewModel.fetchBookmarks { error in
-            if let error = error {
-                self.showError(error)
-            } else {
-                self.collectionView.reloadData()
+                self.userNameLabel.text = self.viewModel.username
+                self.imageView.kf.setImage(with: URL(string: self.viewModel.profileImage))
             }
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        didValueChangedSegmentedControl(UISegmentedControl())
+    }
+    
+    @IBAction func editButton(_ sender: UIButton) {
+        navigationController?.pushViewController(ProfileEditViewController(viewModel: ProfileEditViewModel()), animated: true)
+    }
+    
     @IBAction func didValueChangedSegmentedControl(_ sender: UISegmentedControl) {
+
+        collectionView.reloadData()
         let title = segmentedControl.titleForSegment(at: segmentedControl.selectedSegmentIndex)
         if title == "Favorites" {
             viewModel.fetchFavorites { error in
                 if let error = error {
                     self.showError(error)
                 } else {
+                    self.userNameLabel.text = self.viewModel.username
+                    self.imageView.kf.setImage(with: URL(string: self.viewModel.profileImage))
                     self.collectionView.reloadData()
+                    
                 }
             }
         } else {
@@ -72,6 +90,8 @@ final class ProfileViewController: FViewController {
                 if let error = error {
                     self.showError(error)
                 } else {
+                    self.userNameLabel.text = self.viewModel.username
+                    self.imageView.kf.setImage(with: URL(string: self.viewModel.profileImage))
                     self.collectionView.reloadData()
                 }
             }
@@ -90,7 +110,6 @@ final class ProfileViewController: FViewController {
             }
         }
     }
-    
 }
 
 extension ProfileViewController: UICollectionViewDelegate {
@@ -109,13 +128,12 @@ extension ProfileViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! PhotoCollectionViewCell
-        
+
         guard let photo = viewModel.photoForIndexPath(indexPath) else { fatalError("photo not found") }
-        print(photo.title)
+
         cell.photoImageView.kf.setImage(with: photo.photoImageUrl)
-        
+
         return cell
     }
 }

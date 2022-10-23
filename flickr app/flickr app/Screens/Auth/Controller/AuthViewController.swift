@@ -27,10 +27,12 @@ final class AuthViewController: FViewController {
         }
     }
     
+    var segmentedTitle: String = "Sign In"
+    
     var authType: AuthType = .signIn {
         didSet {
-            titleLabel.text = title
-            confirmButton.setTitle(title, for: .normal)
+            titleLabel.text = segmentedTitle
+            confirmButton.setTitle(segmentedTitle, for: .normal)
         }
     }
     
@@ -51,6 +53,19 @@ final class AuthViewController: FViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        credentionTextField.layer.masksToBounds = true
+        credentionTextField.layer.borderWidth = 0.2
+        credentionTextField.layer.borderColor = UIColor.black.cgColor
+        credentionTextField.layer.cornerRadius = 10.0
+        
+        passwordTextField.layer.masksToBounds = true
+        passwordTextField.layer.borderWidth = 0.2
+        passwordTextField.layer.borderColor = UIColor.black.cgColor
+        passwordTextField.layer.cornerRadius = 10.0
+        
+        confirmButton.layer.masksToBounds = true
+        confirmButton.layer.cornerRadius = 20.0
 
         viewModel.changeHandler = { change in
             switch change {
@@ -112,7 +127,7 @@ final class AuthViewController: FViewController {
     }
     
     @IBAction func didValueChangedSegmentedControl(_ sender: UISegmentedControl) {
-        let title = segmentedControl.titleForSegment(at: segmentedControl.selectedSegmentIndex)
-        authType = AuthType(text: title ?? "Sign In")
+        segmentedTitle = segmentedControl.titleForSegment(at: segmentedControl.selectedSegmentIndex)!
+        authType = AuthType(text: segmentedTitle)
     }
 }

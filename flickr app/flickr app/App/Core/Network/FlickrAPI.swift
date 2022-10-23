@@ -15,7 +15,7 @@ enum FlickrAPI {
     case search(text: String)
 }
 
-private let apiKey = "a6cfc7b65f0b815396e97c15946a7dd9"
+private let apiKey = "5082072f73d49d335280ce3b60e96367"
 
 extension FlickrAPI: TargetType {
     var baseURL: URL {
