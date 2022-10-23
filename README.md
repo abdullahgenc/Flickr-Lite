@@ -2,14 +2,6 @@
 
 Note: Before the application is run, it is necessary to assign the current api to the apiKey variable in the FlickrAPI.swift file.
 
-## Requirements I Couldnt Make on Time
-
-- User profile editing operation.
-- Display of liked and saved posts on the profile page. (post informations are successfully stored in firestore)
-- Using IQKeyboardManager
-
-Remaining requirements and developments will be done at develop branch.
-
 ## App Overview
 
 https://user-images.githubusercontent.com/47529941/196901036-288011fe-210e-41cd-b117-bc0d3fcf87f7.mp4
