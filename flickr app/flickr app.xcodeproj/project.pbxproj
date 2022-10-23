@@ -25,6 +25,10 @@
 		0BBA57A728FFA46D00D13AC0 /* FViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBA57A628FFA46D00D13AC0 /* FViewModel.swift */; };
 		0BBA57AB28FFAA4100D13AC0 /* RemoteConfigDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0BBA57AA28FFAA4100D13AC0 /* RemoteConfigDefaults.plist */; };
 		0BBA57AE29008B8E00D13AC0 /* PhotoInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBA57AD29008B8E00D13AC0 /* PhotoInfo.swift */; };
+		0BBA57B22904E26E00D13AC0 /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBA57B02904E26E00D13AC0 /* ProfileEditViewController.swift */; };
+		0BBA57B32904E26E00D13AC0 /* ProfileSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0BBA57B12904E26E00D13AC0 /* ProfileSettingsViewController.xib */; };
+		0BBA57B52904E28500D13AC0 /* ProfileEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBA57B42904E28500D13AC0 /* ProfileEditViewModel.swift */; };
+		0BD1B4EB2905BDC2005FB136 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 0BD1B4EA2905BDC2005FB136 /* IQKeyboardManagerSwift */; };
 		0BDB023D28FB8D9A005CBC53 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BDB023C28FB8D9A005CBC53 /* AppDelegate.swift */; };
 		0BDB024628FB8D9B005CBC53 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0BDB024528FB8D9B005CBC53 /* Assets.xcassets */; };
 		0BDB024928FB8D9B005CBC53 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0BDB024728FB8D9B005CBC53 /* LaunchScreen.storyboard */; };
@@ -66,6 +70,9 @@
 		0BBA57A628FFA46D00D13AC0 /* FViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FViewModel.swift; sourceTree = "<group>"; };
 		0BBA57AA28FFAA4100D13AC0 /* RemoteConfigDefaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = RemoteConfigDefaults.plist; path = ../../../../../../Downloads/RemoteConfigDefaults.plist; sourceTree = "<group>"; };
 		0BBA57AD29008B8E00D13AC0 /* PhotoInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoInfo.swift; sourceTree = "<group>"; };
+		0BBA57B02904E26E00D13AC0 /* ProfileEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewController.swift; sourceTree = "<group>"; };
+		0BBA57B12904E26E00D13AC0 /* ProfileSettingsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileSettingsViewController.xib; sourceTree = "<group>"; };
+		0BBA57B42904E28500D13AC0 /* ProfileEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewModel.swift; sourceTree = "<group>"; };
 		0BDB023928FB8D9A005CBC53 /* flickr app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "flickr app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0BDB023C28FB8D9A005CBC53 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0BDB024528FB8D9B005CBC53 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -91,6 +98,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0BEED7D728FEDD6700F3E902 /* FirebaseFirestoreSwift in Frameworks */,
+				0BD1B4EB2905BDC2005FB136 /* IQKeyboardManagerSwift in Frameworks */,
 				0BEED7D528FEDD6700F3E902 /* FirebaseDatabaseSwift in Frameworks */,
 				0B1786D428FBF52500B0C28B /* Kingfisher in Frameworks */,
 				0BEED7D928FEDD6700F3E902 /* FirebaseRemoteConfigSwift in Frameworks */,
@@ -229,6 +237,40 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		0BBA57AF2904E23C00D13AC0 /* ProfileEdit */ = {
+			isa = PBXGroup;
+			children = (
+				0BD1B4E52904FD8E005FB136 /* ViewModel */,
+				0BD1B4E62904FD97005FB136 /* Controller */,
+				0BD1B4E72904FDBB005FB136 /* View */,
+			);
+			path = ProfileEdit;
+			sourceTree = "<group>";
+		};
+		0BD1B4E52904FD8E005FB136 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				0BBA57B42904E28500D13AC0 /* ProfileEditViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		0BD1B4E62904FD97005FB136 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				0BBA57B02904E26E00D13AC0 /* ProfileEditViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		0BD1B4E72904FDBB005FB136 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0BBA57B12904E26E00D13AC0 /* ProfileSettingsViewController.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		0BDB023028FB8D9A005CBC53 = {
 			isa = PBXGroup;
 			children = (
@@ -273,6 +315,7 @@
 				0BDB025328FB917E005CBC53 /* RecentList */,
 				0BEED7BA28FCCE9800F3E902 /* SearchPhoto */,
 				0B4E5A1E28FEF25A002D71D6 /* Profile */,
+				0BBA57AF2904E23C00D13AC0 /* ProfileEdit */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -447,6 +490,7 @@
 				0BEED7D628FEDD6700F3E902 /* FirebaseFirestoreSwift */,
 				0BEED7D828FEDD6700F3E902 /* FirebaseRemoteConfigSwift */,
 				0BEED7DA28FEDD6700F3E902 /* FirebaseStorage */,
+				0BD1B4EA2905BDC2005FB136 /* IQKeyboardManagerSwift */,
 			);
 			productName = "flickr app";
 			productReference = 0BDB023928FB8D9A005CBC53 /* flickr app.app */;
@@ -480,6 +524,7 @@
 				0BDB026128FB9EDB005CBC53 /* XCRemoteSwiftPackageReference "Moya" */,
 				0B1786D228FBF52500B0C28B /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				0BEED7D128FEDD6700F3E902 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				0BD1B4E92905BDC2005FB136 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 			);
 			productRefGroup = 0BDB023A28FB8D9A005CBC53 /* Products */;
 			projectDirPath = "";
@@ -501,6 +546,7 @@
 				0BDB024928FB8D9B005CBC53 /* LaunchScreen.storyboard in Resources */,
 				0BEED7BE28FCD11300F3E902 /* SearchPhotoViewController.xib in Resources */,
 				0BEED7CE28FEB48200F3E902 /* PhotoCollectionViewCell.xib in Resources */,
+				0BBA57B32904E26E00D13AC0 /* ProfileSettingsViewController.xib in Resources */,
 				0BBA57AB28FFAA4100D13AC0 /* RemoteConfigDefaults.plist in Resources */,
 				0BDB025728FB91CE005CBC53 /* RecentListViewController.xib in Resources */,
 				0BDB024628FB8D9B005CBC53 /* Assets.xcassets in Resources */,
@@ -522,8 +568,10 @@
 				0BBA549428FF193F00CF32DE /* Encodable+Extensions.swift in Sources */,
 				0BDB026028FB9E05005CBC53 /* FlickrAPI.swift in Sources */,
 				0BEED7CD28FEB48200F3E902 /* PhotoCollectionViewCell.swift in Sources */,
+				0BBA57B52904E28500D13AC0 /* ProfileEditViewModel.swift in Sources */,
 				0BBA57A228FFA38000D13AC0 /* FireBaseFireStoreAccesible.swift in Sources */,
 				0BBA549828FF240F00CF32DE /* AlertPresentable.swift in Sources */,
+				0BBA57B22904E26E00D13AC0 /* ProfileEditViewController.swift in Sources */,
 				0BBA579E28FF9C0400D13AC0 /* User.swift in Sources */,
 				0BDB026628FBA5D4005CBC53 /* RecentListViewModel.swift in Sources */,
 				0BBA57A528FFA3D800D13AC0 /* UserDefaultConstants.swift in Sources */,
@@ -766,6 +814,14 @@
 				minimumVersion = 7.0.0;
 			};
 		};
+		0BD1B4E92905BDC2005FB136 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.5.0;
+			};
+		};
 		0BDB026128FB9EDB005CBC53 /* XCRemoteSwiftPackageReference "Moya" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Moya/Moya.git";
@@ -789,6 +845,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0B1786D228FBF52500B0C28B /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		0BD1B4EA2905BDC2005FB136 /* IQKeyboardManagerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0BD1B4E92905BDC2005FB136 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			productName = IQKeyboardManagerSwift;
 		};
 		0BDB026228FB9EDB005CBC53 /* Moya */ = {
 			isa = XCSwiftPackageProductDependency;

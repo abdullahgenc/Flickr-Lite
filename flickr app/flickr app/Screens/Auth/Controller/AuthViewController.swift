@@ -53,6 +53,19 @@ final class AuthViewController: FViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        credentionTextField.layer.masksToBounds = true
+        credentionTextField.layer.borderWidth = 0.2
+        credentionTextField.layer.borderColor = UIColor.black.cgColor
+        credentionTextField.layer.cornerRadius = 10.0
+        
+        passwordTextField.layer.masksToBounds = true
+        passwordTextField.layer.borderWidth = 0.2
+        passwordTextField.layer.borderColor = UIColor.black.cgColor
+        passwordTextField.layer.cornerRadius = 10.0
+        
+        confirmButton.layer.masksToBounds = true
+        confirmButton.layer.cornerRadius = 20.0
 
         viewModel.changeHandler = { change in
             switch change {
